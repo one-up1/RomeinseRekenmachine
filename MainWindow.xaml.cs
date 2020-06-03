@@ -18,6 +18,8 @@ namespace RomeinseRekenmachine
         public MainWindow()
         {
             InitializeComponent();
+            Console.WriteLine(RomanNumber.Format(37));
+            //Console.WriteLine(RomanNumber.Parse("XXXVII"));
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
