@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace RomeinseRekenmachine
 {
+    /**
+     * Ik moet eerlijk toegeven dat ik dit niet zelf bedacht heb.
+     * Als voorbeeld heb ik dit script gebruikt: https://www.romeinsecijfer.nl/romeinscijfer.js
+     */
     public static class RomanNumber
     {
         private static readonly Dictionary<char, int> romans = new Dictionary<char, int>();
@@ -37,7 +42,7 @@ namespace RomeinseRekenmachine
             getChar.Add(6, "M");
         }
 
-        public static int Parse(String rNumb)
+        public static int Parse(String s)
         {
             Dictionary<char, int> counter = new Dictionary<char, int>();
             counter.Add('I', 0);
@@ -53,15 +58,15 @@ namespace RomeinseRekenmachine
             int thisNumb = 0;
             int lastSub = int.MaxValue;
 
-            rNumb = rNumb.ToUpper();
-            for (int i = 0; i < rNumb.Length; i++)
+            s = s.ToUpper();
+            for (int i = 0; i < s.Length; i++)
             {
-                char currentR = rNumb[i];
-                char nextR = i < rNumb.Length - 1 ? rNumb[i + 1] : char.MinValue;
-                char prevR = i > 0 ? rNumb[i - 1] : char.MinValue;
+                char currentR = s[i];
+                char nextR = i < s.Length - 1 ? s[i + 1] : char.MinValue;
+                char prevR = i > 0 ? s[i - 1] : char.MinValue;
 
                 if (!romans.ContainsKey(currentR) ||
-                    (!romans.ContainsKey(nextR) && i + 1 < rNumb.Length))
+                    (!romans.ContainsKey(nextR) && i + 1 < s.Length))
                 {
                     throw new FormatException();
                 }
@@ -95,19 +100,18 @@ namespace RomeinseRekenmachine
             return intNumb;
         }
 
-        public static string Format(int intNumb)
+        public static string Format(int num)
         {
-            //TODO: validation
-            string romNumb;
-            string romNumbFinal = "";
-            string s = intNumb.ToString();
+            if (num < 0)
+                throw new FormatException();
+            string s = num.ToString();
+
+            string ret = "";
             for (int i = 0; i < s.Length; i++)
             {
-                int currentI = int.Parse(s[s.Length - (i + 1)].ToString());
-                romNumb = romNumbFinal;
-                romNumbFinal = Ints(i, currentI) + romNumb;
+                ret = Ints(i, int.Parse(s[s.Length - (i + 1)].ToString())) + ret;
             }
-            return romNumbFinal;
+            return ret;
         }
 
         private static bool TestSub(char cR, char nR, char pR)

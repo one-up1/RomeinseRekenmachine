@@ -13,13 +13,13 @@ namespace RomeinseRekenmachine
     public partial class MainWindow : Window
     {
         private Operation operation;
-        private double result;
+        private int result;
 
         public MainWindow()
         {
             InitializeComponent();
-            Console.WriteLine(RomanNumber.Format(37));
-            //Console.WriteLine(RomanNumber.Parse("XXXVII"));
+            Console.WriteLine(RomanNumber.Format(3257));
+           // Console.WriteLine(RomanNumber.Parse("MMMCCLVII"));
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -99,10 +99,10 @@ namespace RomeinseRekenmachine
             if (tbInput.Text.Length > 0)
             {
                 // Probeer de input te parsen en maak de TextBox weer leeg als dit lukt.
-                double input;
+                int input;
                 try
                 {
-                    input = double.Parse(tbInput.Text);
+                    input = RomanNumber.Parse(tbInput.Text);
                     tbInput.Background = Brushes.White;
                     tbInput.Text = "";
                 }
@@ -140,7 +140,7 @@ namespace RomeinseRekenmachine
                 // Laat het resultaat zien in een Label.
                 // Dubbelkikken op een result label zet de input op dat resultaat.
                 Label lResult = new Label();
-                lResult.Content = result;
+                lResult.Content = RomanNumber.Format(result);
                 lResult.MouseDoubleClick += Label_MouseDoubleClick; // Label heeft geen Click event? :S
                 spResults.Children.Add(lResult);
                 svResults.ScrollToBottom();
