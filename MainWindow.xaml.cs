@@ -57,32 +57,7 @@ namespace RomeinseRekenmachine
             // Het "sender" object is een referentie naar de knop waarop geklikt is,
             // dit kunnen we casten naar een Button en de tekst van die knop in de input plakken.
             // Zo hebben we geen aparte event handler nodig voor alle knoppen.
-            tbInput.Text += ((Button)sender).Content;
-        }
-
-        private void bDot_Click(object sender, RoutedEventArgs e)
-        {
-            // Dit kan blijkbaar verschillen, double.Parse() herkent geen decimalen of geeft zelfs
-            // een exception als de decimalen gescheiden zijn door een . en dit volgens de
-            // land/regio instellingen oid een , is of andersom.
-            tbInput.Text += CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
-        }
-
-        private void bPercent_Click(object sender, RoutedEventArgs e)
-        {
-            if (tbInput.Text.Length > 0)
-            {
-                try
-                {
-                    tbInput.Text = (double.Parse(tbInput.Text) / 100).ToString();
-                    tbInput.Background = Brushes.White;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error parsing percentage: " + ex);
-                    tbInput.Background = Brushes.Red;
-                }
-            }
+            tbInput.Text += ((Button) sender).Content;
         }
 
         private void bDivide_Click(object sender, RoutedEventArgs e)

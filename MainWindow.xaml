@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RomeinseRekenmachine"
         mc:Ignorable="d"
-        Width="400"
-        Height="400"
-        MinHeight="400"
-        MinWidth="400"
+        Width="600"
+        Height="560"
+        MinWidth="600"
+        MinHeight="560"
         Title="Rekenmachine"
         WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded"
@@ -24,9 +24,15 @@
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
@@ -36,7 +42,7 @@
         <ScrollViewer
             Name="svResults"
             Grid.Row="0"
-            Grid.ColumnSpan="4"
+            Grid.ColumnSpan="6"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Width="Auto"
@@ -51,7 +57,7 @@
         <TextBox
             Name="tbInput"
             Grid.Row="1"
-            Grid.ColumnSpan="3"
+            Grid.ColumnSpan="5"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             VerticalContentAlignment="Center"
@@ -64,7 +70,7 @@
         <Label
             Name="lOperation"
             Grid.Row="1"
-            Grid.Column="4"
+            Grid.Column="6"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             HorizontalContentAlignment="Center"
@@ -81,7 +87,7 @@
             VerticalAlignment="Stretch"
             Width="Auto"
             Height="Auto"
-            Content="7"
+            Content="I"
             Click="Button_Click" />
 
         <Button
@@ -91,7 +97,7 @@
             VerticalAlignment="Stretch"
             Width="Auto"
             Height="Auto"
-            Content="8"
+            Content="IX"
             Click="Button_Click" />
 
         <Button
@@ -101,13 +107,34 @@
             VerticalAlignment="Stretch"
             Width="Auto"
             Height="Auto"
-            Content="9"
+            Content="XVII"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="2"
+            Grid.Column="3"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="LXX"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="2"
+            Grid.Column="4"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="DC"
             Click="Button_Click" />
 
         <Button
             Name="bDivide"
             Grid.Row="2"
-            Grid.Column="3"
+            Grid.Column="5"
+            Grid.RowSpan="2"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Width="Auto"
@@ -122,7 +149,7 @@
             VerticalAlignment="Stretch"
             Width="Auto"
             Height="Auto"
-            Content="4"
+            Content="II"
             Click="Button_Click" />
 
         <Button
@@ -132,7 +159,7 @@
             VerticalAlignment="Stretch"
             Width="Auto"
             Height="Auto"
-            Content="5"
+            Content="X"
             Click="Button_Click" />
 
         <Button
@@ -142,13 +169,34 @@
             VerticalAlignment="Stretch"
             Width="Auto"
             Height="Auto"
-            Content="6"
+            Content="XVIII"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="3"
+            Grid.Column="3"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="LXXX"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="3"
+            Grid.Column="4"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="DCC"
             Click="Button_Click" />
 
         <Button
             Name="bMultiply"
-            Grid.Row="3"
-            Grid.Column="3"
+            Grid.Row="4"
+            Grid.Column="5"
+            Grid.RowSpan="2"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Width="Auto"
@@ -163,7 +211,7 @@
             VerticalAlignment="Stretch"
             Width="Auto"
             Height="Auto"
-            Content="1"
+            Content="III"
             Click="Button_Click" />
 
         <Button
@@ -173,7 +221,7 @@
             VerticalAlignment="Stretch"
             Width="Auto"
             Height="Auto"
-            Content="2"
+            Content="XI"
             Click="Button_Click" />
 
         <Button
@@ -183,13 +231,34 @@
             VerticalAlignment="Stretch"
             Width="Auto"
             Height="Auto"
-            Content="3"
+            Content="XIX"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="4"
+            Grid.Column="3"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="XC"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="4"
+            Grid.Column="4"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="DCCC"
             Click="Button_Click" />
 
         <Button
             Name="bSubtract"
-            Grid.Row="4"
-            Grid.Column="3"
+            Grid.Row="6"
+            Grid.Column="5"
+            Grid.RowSpan="2"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Width="Auto"
@@ -204,35 +273,54 @@
             VerticalAlignment="Stretch"
             Width="Auto"
             Height="Auto"
-            Content="0"
+            Content="IV"
             Click="Button_Click" />
 
         <Button
-            Name="bDot"
             Grid.Row="5"
             Grid.Column="1"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Width="Auto"
             Height="Auto"
-            Content="."
-            Click="bDot_Click" />
+            Content="XII"
+            Click="Button_Click" />
 
         <Button
-            Name="bPercent"
             Grid.Row="5"
             Grid.Column="2"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Width="Auto"
             Height="Auto"
-            Content="%"
-            Click="bPercent_Click" />
+            Content="XX"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="5"
+            Grid.Column="3"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="C"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="5"
+            Grid.Column="4"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="CM"
+            Click="Button_Click" />
 
         <Button
             Name="bAdd"
-            Grid.Row="5"
-            Grid.Column="3"
+            Grid.Row="8"
+            Grid.Column="5"
+            Grid.RowSpan="2"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Width="Auto"
@@ -241,9 +329,209 @@
             Click="bAdd_Click" />
 
         <Button
-            Name="bIs"
             Grid.Row="6"
-            Grid.ColumnSpan="4"
+            Grid.Column="0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="V"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="6"
+            Grid.Column="1"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="XIII"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="6"
+            Grid.Column="2"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="XXX"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="6"
+            Grid.Column="3"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="CC"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="6"
+            Grid.Column="4"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="M"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="7"
+            Grid.Column="0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="VI"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="7"
+            Grid.Column="1"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="XIV"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="7"
+            Grid.Column="2"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="XL"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="7"
+            Grid.Column="3"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="CCC"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="7"
+            Grid.Column="4"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="MM"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="8"
+            Grid.Column="0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="VII"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="8"
+            Grid.Column="1"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="XV"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="8"
+            Grid.Column="2"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="L"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="8"
+            Grid.Column="3"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="CD"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="8"
+            Grid.Column="4"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="MMM"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="9"
+            Grid.Column="0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="VIII"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="9"
+            Grid.Column="1"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="XVI"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="9"
+            Grid.Column="2"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="LX"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="9"
+            Grid.Column="3"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="D"
+            Click="Button_Click" />
+
+        <Button
+            Grid.Row="9"
+            Grid.Column="4"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto"
+            Content="MMMM"
+            Click="Button_Click" />
+
+        <Button
+            Name="bIs"
+            Grid.Row="10"
+            Grid.ColumnSpan="6"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Width="Auto"
