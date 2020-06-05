@@ -8,16 +8,13 @@ using System.Threading.Tasks;
 namespace RomeinseRekenmachine
 {
     /**
-     * Ik moet eerlijk toegeven dat ik dit niet zelf bedacht heb.
-     * Als voorbeeld heb ik dit script gebruikt: https://www.romeinsecijfer.nl/romeinscijfer.js
+     * https://www.romeinsecijfer.nl/romeinscijfer.js
      */
     public static class RomanNumber
     {
         private static readonly Dictionary<char, int> ints = new Dictionary<char, int>();
         private static readonly List<char> subs = new List<char>();
 
-        // Dit moeten blijkbaar strings zijn omdat het "concattenaten" van chars met + blijkbaar
-        // niet werkt in C#, dan wordt het resultaat een getal.
         private static readonly Dictionary<int, string> chars = new Dictionary<int, string>();
 
         static RomanNumber()
