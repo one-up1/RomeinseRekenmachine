@@ -13,37 +13,45 @@ namespace RomeinseRekenmachine
      */
     public static class RomanNumber
     {
-        private static readonly Dictionary<char, int> romans = new Dictionary<char, int>();
+        private static readonly Dictionary<char, int> ints = new Dictionary<char, int>();
         private static readonly List<char> subs = new List<char>();
 
-        private static readonly Dictionary<int, string> getChar = new Dictionary<int, string>();
+        // Dit moeten blijkbaar strings zijn omdat het "concattenaten" van chars met + blijkbaar
+        // niet werkt in C#, dan wordt het resultaat een getal.
+        private static readonly Dictionary<int, string> chars = new Dictionary<int, string>();
 
         static RomanNumber()
         {
-            romans.Add('I', 1);
-            romans.Add('V', 5);
-            romans.Add('X', 10);
-            romans.Add('L', 50);
-            romans.Add('C', 100);
-            romans.Add('D', 500);
-            romans.Add('M', 1000);
+            ints.Add('I', 1);
+            ints.Add('V', 5);
+            ints.Add('X', 10);
+            ints.Add('L', 50);
+            ints.Add('C', 100);
+            ints.Add('D', 500);
+            ints.Add('M', 1000);
 
             subs.Add('I');
             subs.Add('X');
             subs.Add('C');
             subs.Add('M');
 
-            getChar.Add(0, "I");
-            getChar.Add(1, "V");
-            getChar.Add(2, "X");
-            getChar.Add(3, "L");
-            getChar.Add(4, "C");
-            getChar.Add(5, "D");
-            getChar.Add(6, "M");
+            chars.Add(0, "I");
+            chars.Add(1, "V");
+            chars.Add(2, "X");
+            chars.Add(3, "L");
+            chars.Add(4, "C");
+            chars.Add(5, "D");
+            chars.Add(6, "M");
         }
 
         public static int Parse(String s)
         {
+            s = s.ToUpper();
+
+            int ret = 0;
+            int lastNumb = int.MaxValue;
+            int lastSub = int.MaxValue;
+
             Dictionary<char, int> counter = new Dictionary<char, int>();
             counter.Add('I', 0);
             counter.Add('V', 2);
@@ -53,33 +61,37 @@ namespace RomeinseRekenmachine
             counter.Add('D', 2);
             counter.Add('M', int.MinValue);
 
-            int intNumb = 0;
-            int lastNumb = int.MaxValue;
-            int thisNumb = 0;
-            int lastSub = int.MaxValue;
+            // Voeg ondersteuning toe voor negatieve getallen.
+            bool negative = false;
+            if (s.StartsWith("-"))
+            {
+                s = s.Substring(1);
+                negative = true;
+            }
 
-            s = s.ToUpper();
             for (int i = 0; i < s.Length; i++)
             {
                 char currentR = s[i];
                 char nextR = i < s.Length - 1 ? s[i + 1] : char.MinValue;
                 char prevR = i > 0 ? s[i - 1] : char.MinValue;
 
-                if (!romans.ContainsKey(currentR) ||
-                    (!romans.ContainsKey(nextR) && i + 1 < s.Length))
+                if (!ints.ContainsKey(currentR) ||
+                    !ints.ContainsKey(nextR) && i + 1 < s.Length ||
+                    ints[currentR] >= lastSub)
                 {
                     throw new FormatException();
                 }
 
+                int thisNumb;
                 if (TestSub(currentR, nextR, prevR))
                 {
-                    thisNumb = romans[nextR] - romans[currentR];
+                    thisNumb = ints[nextR] - ints[currentR];
+                    lastSub = ints[currentR];
                     i++;
-                    lastSub = romans[currentR];
                 }
                 else if (counter[currentR] < 3)
                 {
-                    thisNumb = romans[currentR];
+                    thisNumb = ints[currentR];
                     counter[currentR]++;
                 }
                 else
@@ -93,36 +105,54 @@ namespace RomeinseRekenmachine
                 }
                 else
                 {
-                    intNumb += thisNumb;
+                    ret += thisNumb;
                     lastNumb = thisNumb;
                 }
             }
-            return intNumb;
+
+            if (negative)
+            {
+                ret *= -1;
+            }
+
+            return ret;
         }
 
         public static string Format(int num)
         {
-            if (num < 0)
-                throw new FormatException();
-            string s = num.ToString();
-
             string ret = "";
+
+            // Voeg ondersteuning toe voor negatieve getallen.
+            bool negative = false;
+            if (num < 0)
+            {
+                num *= -1;
+                negative = true;
+            }
+
+            string s = num.ToString();
             for (int i = 0; i < s.Length; i++)
             {
-                ret = Ints(i, int.Parse(s[s.Length - (i + 1)].ToString())) + ret;
+                ret = getRomanChar(i, int.Parse(s[s.Length - (i + 1)].ToString())) + ret;
             }
+
+            if (negative)
+            {
+                ret = "-" + ret;
+            }
+
             return ret;
         }
 
         private static bool TestSub(char cR, char nR, char pR)
         {
-            if (cR != char.MinValue && nR != char.MinValue && romans[cR] < romans[nR])
+            if (nR != char.MinValue && ints[cR] < ints[nR])
             {
-                if ((romans[pR] == romans[nR]) && !subs.Contains(nR))
+                if (pR != char.MinValue && ints[pR] == ints[nR] && !subs.Contains(nR))
                 {
                     throw new FormatException();
                 }
-                else if (subs.Contains(cR) && 10 * romans[cR] >= romans[nR])
+                else if (subs.Contains(cR) && 10 * ints[cR] >= ints[nR])
                 {
                     return true;
                 }
@@ -134,41 +164,42 @@ namespace RomeinseRekenmachine
             return false;
         }
 
-        private static string Ints(int pos, int iValue)
+        private static string getRomanChar(int pos, int iValue)
         {
-            string charValue = "";
+            string ret = "";
             int s = 2 * pos;
+
             if (pos > 2)
             {
-                for (int i = 0; i < iValue * Math.Pow(10, (pos - 3)); i++)
+                for (int i = 0; i < iValue * Math.Pow(10, pos - 3); i++)
                 {
-                    charValue += "M";
+                    ret += "M";
                 }
             }
             else if (iValue < 4)
             {
                 for (int i = 0; i < iValue; i++)
                 {
-                    charValue += getChar[s];
+                    ret += chars[s];
                 }
             }
             else if (iValue == 4)
             {
-                charValue = getChar[s] + getChar[s + 1];
+                ret = chars[s] + chars[s + 1];
             }
             else if (iValue < 9)
             {
-                charValue = getChar[s + 1];
+                ret = chars[s + 1];
                 for (var i = 0; i < iValue - 5; i++)
                 {
-                    charValue += getChar[s];
+                    ret += chars[s];
                 }
             }
             else if (iValue == 9)
             {
-                charValue = getChar[s] + getChar[s + 2];
+                ret = chars[s] + chars[s + 2];
             }
-            return charValue;
+            return ret;
         }
     }
 }
