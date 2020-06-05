@@ -72,8 +72,8 @@ namespace RomeinseRekenmachine
                 char nextR = i < s.Length - 1 ? s[i + 1] : char.MinValue;
                 char prevR = i > 0 ? s[i - 1] : char.MinValue;
 
-                if (!ints.ContainsKey(currentR) ||
-                    !ints.ContainsKey(nextR) && i + 1 < s.Length ||
+                if ((!ints.ContainsKey(currentR) ||
+                    !ints.ContainsKey(nextR) && i + 1 < s.Length) ||
                     ints[currentR] >= lastSub)
                 {
                     throw new FormatException();
